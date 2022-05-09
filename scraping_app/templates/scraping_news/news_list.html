@@ -1,0 +1,67 @@
+<!doctype html>
+{% extends 'scraping_news/base.html' %}
+
+{% block header %}
+<div class="header">
+
+        <div class="title">ニュースリサーチ</div>
+
+        <!-- <nav class="nav">
+        <ul class="menu-group">
+            <li class="menu-item"><a href="#">login</a></li>
+            <li class="menu-item"><a href="#">項目2</a></li>
+            <li class="menu-item"><a href="#">項目3</a></li>
+            <li class="menu-item"><a href="#">項目4</a></li>
+        </ul>
+    </nav> -->
+
+</div>
+
+{% endblock header %}
+
+
+{% block content %}
+<div class="main">
+    <div class="main-contents">
+        <h3>検索したいニュースサイトを選択してください</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn--blue btn--cubic btn--shadow" name="yahoo">Yahoo!</button>
+            <button type="submit" class="btn btn--blue btn--cubic btn--shadow" name="nhk">NHK</button>
+            <button type="submit" class="btn btn--blue btn--cubic btn--shadow" name="yomiuri">YOMIURI</button>
+
+        </form>
+    </div>
+
+
+
+    <div class="main-contents">
+        <h3>検索結果</h3>
+        {% if news_list %}
+        <div class="container">
+            <ul class="list-group list-group-flush">
+                <table border="2">
+                    <tr>
+                        <th>タイトル</th>
+                        <th>URL</th>
+                    </tr>
+                    {% for title, url in news_list %}
+                    <tr>
+                        <td>{{ title }}</td>
+                        <td><a href="{{ url }}">{{ url }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <div class="main-contents">
+        <h3>保存したニュース</h3>
+
+    </div>
+
+
+
+</div>
+{% endblock content %}
