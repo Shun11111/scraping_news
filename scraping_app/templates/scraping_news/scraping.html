@@ -1,0 +1,59 @@
+<!doctype html>
+{% extends 'scraping_news/base.html' %}
+
+{% block header %}
+<div class="header">
+    <div class="title">ニュースリサーチ</div>
+    <div class="title">保存したニュース</div>
+</div>
+
+{% endblock header %}
+
+
+{% block content %}
+<div class="main">
+    <div class="main-contents">
+        <h3>検索したいニュースサイトを選択してください</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn--blue btn--cubic btn--shadow" name="yahoo">Yahoo!</button>
+            <button type="submit" class="btn btn--blue btn--cubic btn--shadow" name="nhk">NHK</button>
+            <button type="submit" class="btn btn--blue btn--cubic btn--shadow" name="yomiuri">YOMIURI</button>
+
+        </form>
+    </div>
+    <div class="main-contents">
+
+        {% if news_list %}
+        <h3>検索結果</h3>
+        <div class="container">
+            <form action="" method="post">
+                <ul class="list-group list-group-flush">
+
+                    <table border="2">
+                        <tr>
+                            <th>タイトル</th>
+                            <th>URL</th>
+                        </tr>
+                        {% for title, url in news_list %}
+                        {% csrf_token %}
+                        <tr>
+                            <input type="hidden" name="title" value="{{ title }}">
+                            <input type="hidden" name="url" value="{{ url }}">
+                            <td>
+                                <input type="checkbox" name=check_{{product.id}} id={{product.id}} value="True">
+                            </td>
+                            <td>{{ title }}</td>
+                            <td><a href="{{ url }}">{{ url }}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </ul>
+                <button name="save">保存</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock content %}
