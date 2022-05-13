@@ -1,18 +1,6 @@
-<!doctype html>
-{% extends 'scraping_news/base.html' %}
-
-{% block header %}
-<div class="header">
-    <div class="title">ニュースリサーチ</div>
-    <div class="title">保存したニュース</div>
-</div>
-
-{% endblock header %}
-
-
-{% block content %}
+<!doctype html> {% extends 'scraping_news/base.html' %} {% block content %}
 <div class="main">
-    <div class="main-contents">
+    <div class="search">
         <h3>検索したいニュースサイトを選択してください</h3>
         <form action="" method="post">
             {% csrf_token %}
@@ -26,22 +14,27 @@
 
         {% if news_list %}
         <h3>検索結果</h3>
-        <div class="container">
-            <form action="" method="post">
-                <ul class="list-group list-group-flush">
+
+        <form action="" method="post">{% csrf_token %}
+            <div class="result">
+
+
+                <button name="save" class="save_del">保存</button>
+                <ul class="list-group">
 
                     <table border="2">
                         <tr>
+                            <th width="50">保存</th>
                             <th>タイトル</th>
                             <th>URL</th>
                         </tr>
                         {% for title, url in news_list %}
-                        {% csrf_token %}
+
                         <tr>
                             <input type="hidden" name="title" value="{{ title }}">
                             <input type="hidden" name="url" value="{{ url }}">
                             <td>
-                                <input type="checkbox" name=check_{{product.id}} id={{product.id}} value="True">
+                                <input type="checkbox" name=checks id={{forloop.counter}} value={{forloop.counter}}>
                             </td>
                             <td>{{ title }}</td>
                             <td><a href="{{ url }}">{{ url }}</a></td>
@@ -49,9 +42,9 @@
                         {% endfor %}
                     </table>
                 </ul>
-                <button name="save">保存</button>
-            </form>
-        </div>
+            </div>
+        </form>
+
         {% endif %}
     </div>
 
