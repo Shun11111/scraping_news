@@ -1,3 +1,4 @@
--r ./requirements-dev.txt
+urllib3==1.26.7
+BeautifulSoup4==4.10.0
 gunicorn
 psycopg2
