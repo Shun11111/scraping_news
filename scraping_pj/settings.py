@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 #import environ
+import environ
+
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,14 +25,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
+env = environ.Env(DEBUG=(bool,False))
+env.read_env('.env')
 
-ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = []
 
 # .envから読み込む
 #env = environ.Env()
 #env.read_env(os.path.join(BASE_DIR, '.env'))
-SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = os.environ.get("DEBUG")
+SECRET_KEY = env("SECRET_KEY")
+DEBUG = env("DEBUG")
 
 
 
@@ -87,9 +91,15 @@ WSGI_APPLICATION = 'scraping_pj.wsgi.application'
 #     }
 # }
 DATABASES = {
-    'default': env.db(),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'saved_news',
+        'USER':os.environ.get('DB_USER'),
+        'PASSWORD':os.environ.get('DB_PASSWORD'),
+        'HOST':'',
+        'PORT':'5432',
+    }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
