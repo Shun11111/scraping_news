@@ -32,7 +32,6 @@ ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
 # .envから読み込む
 env = environ.Env()
 env.read_env(os.path.join(BASE_DIR, '.env'))
-SECRET_KEY = env("SECRET_KEY")
 DEBUG = False
 
 
@@ -131,3 +130,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+SECRET_KEY = "django-insecure-y*!%%6%sj7)w_#=!skzbzj9*=_nh$2)#(2(9m8p5$vfycto=j7"
