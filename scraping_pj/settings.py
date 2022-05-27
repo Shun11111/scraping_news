@@ -28,7 +28,8 @@ env = environ.Env(DEBUG=(bool,False))
 env.read_env('.env')
 
 #ALLOWED_HOSTS = [env("ALLOWED_HOSTS")]
-ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
+#ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = ["3.87.100.106"]
 
 # .envから読み込む
 # env = environ.Env()
