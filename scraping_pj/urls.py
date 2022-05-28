@@ -16,11 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include 
-from django.conf.urls import url, static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('scraping_app.urls')),
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
